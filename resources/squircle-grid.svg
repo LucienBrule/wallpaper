@@ -1,0 +1,61 @@
+<svg width="100%" height="100%" viewBox="0 0 5120 1440" xmlns="http://www.w3.org/2000/svg" style="background-color:#0a0a0e;">
+  <defs>
+    <style>
+      .surface2 { fill: #585b70; }
+      .surface1 { fill: #45475a; }
+      .surface0 { fill: #313244; }
+      .pink { fill: #f5c2e7; }
+      .mauve { fill: #cba6f7; }
+      .red { fill: #f38ba8; }
+      .maroon { fill: #eba0ac; }
+      .peach { fill: #fab387; }
+      .yellow { fill: #f9e2af; }
+      .green { fill: #a6e3a1; }
+      .teal { fill: #94e2d5; }
+      .sky { fill: #89dceb; }
+      .sapphire { fill: #74c7ec; }
+      .blue { fill: #89b4fa; }
+      .lavender { fill: #b4befe; }
+      .text { fill: #cdd6f4; }
+    </style>
+    <rect id="squircle" width="25" height="25" rx="3" ry="3"/>
+    <filter id="noise" x="-20%" y="-20%" width="140%" height="140%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" result="noise"/>
+      <feColorMatrix type="matrix" values="
+        1 0 0 0 0
+        0 1 0 0 0
+        0 0 1 0 0
+        0 0 0 0.4 0
+      " result="noised"/>
+    </filter>
+  </defs>
+  <g filter="url(#noise)">
+    <!-- Refined squircle grid alignment for taskbar and side margins -->
+    <g>
+      <script type="text/javascript">
+        <![CDATA[
+          var resolutionWidth = 5120;  // Adjustable width
+          var resolutionHeight = 1440; // Adjustable height
+          var densityFactor = 2;  // Adjustable density multiplier
+          var squircleSize = 25 / densityFactor; // Smaller squircles
+          var marginRatio = 4; // Controls margin between squircles
+          var gridSize = squircleSize * marginRatio; // Margin based on ratio
+          var taskbarHeight = 25; // Taskbar height
+          var marginFromTaskbar = 5; // Extra spacing below taskbar
+          var marginTop = squircleSize > taskbarHeight ? taskbarHeight + marginFromTaskbar : taskbarHeight;
+          var firstColumnOffset = (resolutionWidth % gridSize) / 2; // Ensures left and right balance
+          var marginOffset = (gridSize - squircleSize) / 2;
+          var colorRatio = 0.75; // Adjustable ratio of dark to bright colors
+          var darkColors = ["surface2", "surface1", "surface0"];
+          var brightColors = ["pink", "mauve", "red", "maroon", "peach", "yellow", "green", "teal", "sky", "sapphire", "blue", "lavender", "text"];
+          for (var x = firstColumnOffset; x < resolutionWidth - firstColumnOffset; x += gridSize / densityFactor) {
+            for (var y = marginTop; y < resolutionHeight; y += gridSize / densityFactor) {
+              var color = Math.random() < colorRatio ? darkColors[Math.floor(Math.random() * darkColors.length)] : brightColors[Math.floor(Math.random() * brightColors.length)];
+              document.write('<use href="#squircle" x="' + (x + marginOffset) + '" y="' + (y + marginOffset) + '" class="' + color + '"/>');
+            }
+          }
+        ]]>
+      </script>
+    </g>
+  </g>
+</svg>

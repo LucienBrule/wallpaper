@@ -1,0 +1,1 @@
+from wallpaper.cli import cli
